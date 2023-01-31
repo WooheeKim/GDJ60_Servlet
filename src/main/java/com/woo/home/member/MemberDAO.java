@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import com.woo.home.util.DBConnection;
 
 public class MemberDAO {
-	// ??????
 	// setAddMember
 	public int setAddMember(MemberDTO memberDTO) throws Exception {
 		

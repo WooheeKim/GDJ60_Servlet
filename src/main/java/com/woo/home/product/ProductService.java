@@ -1,6 +1,34 @@
 package com.woo.home.product;
 
+import java.util.List;
+
 public class ProductService {
+	
+	private ProductDAO productDAO = new ProductDAO();
+	{
+		this.productDAO = new ProductDAO();
+	}
+	public ProductService() {
+		this.productDAO = new ProductDAO();
+	}
+	
+	// 결합도가 낮다(약하다)
+	public void setProductDAO(ProductDAO productDAO) {
+		this.productDAO = productDAO;
+	}
+	
+	public int setAddProduct(ProductDTO productDTO, List<ProductOptionDTO> ar) throws Exception {
+		int productNum = productDAO.getProductNum();
+		productDTO.setProductNum(productNum);
+		int result = productDAO.setAddProduct(productDTO);
+		
+		for(ProductOptionDTO productOptionDTO:ar) {
+			productDAO.setAddProductOption(productOptionDTO);
+			result = productDAO.setAddProductOption(productOptionDTO);
+		}
+		
+		return result;
+	}
 
 	public static void main(String[] args) {
 		ProductDAO productDAO = new ProductDAO();
